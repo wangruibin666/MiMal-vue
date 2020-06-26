@@ -291,16 +291,16 @@ import 'swiper/dist/css/swiper.css';
           this.phoneList = [res.list.slice(6, 10), res.list.slice(10, 14)];
         })
       },
-      addCart() {
-        this.showModal = true;
-        // this.axios.post('/carts', {
-        //   productId: id,
-        //   selected: true
-        // }).then((res) => {
-        //   console.log(res);
-        // }).catch(()=> {
-        //   this.showModal = true;
-        // })
+      addCart(id) {
+        this.axios.post('/carts', {
+          productId: id,
+          selected: true
+        }).then((res) => {
+          this.showModal = true;
+          this.$store.dispatch('saveCartCount', res.cartToTalQuantity);
+        }).catch(()=> {
+          this.showModal = false;
+        })
       },
       goToCart() {
         this.$router.push('/cart');
